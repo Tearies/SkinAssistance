@@ -86,7 +86,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="SkinAssistance.Core\SkinAssistance.Core.csproj">
+    <ProjectReference Include="..\SkinAssistance.Core\SkinAssistance.Core.csproj">
       <Project>{3991f856-1650-4bb8-9a7c-5cfae9343c6a}</Project>
       <Name>SkinAssistance.Core</Name>
     </ProjectReference>

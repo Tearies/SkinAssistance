@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs/SkinAssistance/v16
+/packages/NLog.4.6.2
+/SkinAssistance/bin/Debug
+/SkinAssistance/obj/Debug
+/SkinAssistance.Core/bin/Debug
+/SkinAssistance.Core/obj/Debug

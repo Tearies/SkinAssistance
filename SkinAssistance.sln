@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinAssistance", "SkinAssistance.csproj", "{450138A3-7910-401C-976B-74D6AB270F64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinAssistance", "SkinAssistance\SkinAssistance.csproj", "{450138A3-7910-401C-976B-74D6AB270F64}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinAssistance.Core", "SkinAssistance.Core\SkinAssistance.Core.csproj", "{3991F856-1650-4BB8-9A7C-5CFAE9343C6A}"
 EndProject
