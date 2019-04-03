@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinAssistance", "SkinAssistance.csproj", "{450138A3-7910-401C-976B-74D6AB270F64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinAssistance.Core", "SkinAssistance.Core\SkinAssistance.Core.csproj", "{3991F856-1650-4BB8-9A7C-5CFAE9343C6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{450138A3-7910-401C-976B-74D6AB270F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450138A3-7910-401C-976B-74D6AB270F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450138A3-7910-401C-976B-74D6AB270F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450138A3-7910-401C-976B-74D6AB270F64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3991F856-1650-4BB8-9A7C-5CFAE9343C6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3991F856-1650-4BB8-9A7C-5CFAE9343C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3991F856-1650-4BB8-9A7C-5CFAE9343C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3991F856-1650-4BB8-9A7C-5CFAE9343C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A6E6A5A-54A9-4E6B-8995-022E562FC9DC}
+	EndGlobalSection
+EndGlobal

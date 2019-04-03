@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3991F856-1650-4BB8-9A7C-5CFAE9343C6A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SkinAssistance.Core</RootNamespace>
+    <AssemblyName>SkinAssistance.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.2\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationInfo\AppTaskGenerator.cs" />
+    <Compile Include="ApplicationInfo\BootstrapFactory.cs" />
+    <Compile Include="ApplicationInfo\DisposeService.cs" />
+    <Compile Include="ApplicationInfo\DisposeTask.cs" />
+    <Compile Include="ApplicationInfo\InitializeTask.cs" />
+    <Compile Include="ApplicationInfo\InitializeTaskFatory.cs" />
+    <Compile Include="ApplicationInfo\InternalApp.cs" />
+    <Compile Include="ApplicationInfo\NativeWindow.cs" />
+    <Compile Include="ApplicationService\DisposeDelegate.cs" />
+    <Compile Include="ApplicationService\SafeMemoryMappedViewOfFileHandle.cs" />
+    <Compile Include="ApplicationService\WindowsFormsApplicationBase.cs" />
+    <Compile Include="ApplicationService\WinFormsAppContext.cs" />
+    <Compile Include="CommonInitialTask\CommandInitialTaskTypes.cs" />
+    <Compile Include="CommonInitialTask\DispatcherContextTask.cs" />
+    <Compile Include="CommonInitialTask\InitaileLogComponmentsTask.cs" />
+    <Compile Include="CommonInitialTask\InitailUpdateTask.cs" />
+    <Compile Include="CommonInitialTask\InitialThemeTask.cs" />
+    <Compile Include="CommonInitialTask\RegistorExceptionHandlerTask.cs" />
+    <Compile Include="Controls\MetroProgressBar.cs" />
+    <Compile Include="DispatcherContext\DispatcherContext.cs" />
+    <Compile Include="Extensions\AssemblyExtension.cs" />
+    <Compile Include="Extensions\CoreExtension.cs" />
+    <Compile Include="Extensions\DependencyObjectExtensions.cs" />
+    <Compile Include="Extensions\DurationBuilder.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\MethodInjector.cs" />
+    <Compile Include="Extensions\ServiceProviderExtension.cs" />
+    <Compile Include="Extensions\TaskEx.cs" />
+    <Compile Include="Extensions\WindowExtension.cs" />
+    <Compile Include="HotKey\Extensions.cs" />
+    <Compile Include="HotKey\Hotkey.cs" />
+    <Compile Include="HotKey\HotkeyAlreadyRegisteredEventArgs.cs" />
+    <Compile Include="HotKey\HotkeyAlreadyRegisteredException.cs" />
+    <Compile Include="HotKey\HotkeyEventArgs.cs" />
+    <Compile Include="HotKey\HotkeyFlags.cs" />
+    <Compile Include="HotKey\HotkeyManager.cs" />
+    <Compile Include="HotKey\HotkeyManagerBase.cs" />
+    <Compile Include="HotKey\WeakReferenceCollection.cs" />
+    <Compile Include="ICommands\CommandContext.cs" />
+    <Compile Include="ICommands\Helper\IExecuteWithObject.cs" />
+    <Compile Include="ICommands\Helper\IExecuteWithObjectAndResult.cs" />
+    <Compile Include="ICommands\Helper\MessageWeakAction.cs" />
+    <Compile Include="ICommands\Helper\MessageWeakActionGeneric.cs" />
+    <Compile Include="ICommands\Helper\WeakAction.cs" />
+    <Compile Include="ICommands\Helper\WeakActionGeneric.cs" />
+    <Compile Include="ICommands\Helper\WeakFunc.cs" />
+    <Compile Include="ICommands\Helper\WeakFuncGeneric.cs" />
+    <Compile Include="ICommands\IRegistorCommand.cs" />
+    <Compile Include="ICommands\RelayCommand.cs" />
+    <Compile Include="ICommands\ShortCutContext.cs" />
+    <Compile Include="ICommands\ShortKey.cs" />
+    <Compile Include="ICommands\ShortKeyCache.cs" />
+    <Compile Include="ICommands\ShortKeyCaches.cs" />
+    <Compile Include="ICommands\ShortKeyItem.cs" />
+    <Compile Include="ICommands\ShortKeyManager.cs" />
+    <Compile Include="ICommands\XmlCommentExtensions.cs" />
+    <Compile Include="Instance\ActivatorWrapper.cs" />
+    <Compile Include="Instance\InstanseCore.cs" />
+    <Compile Include="Instance\InstanseManager.cs" />
+    <Compile Include="Instance\RefrectorExtentions.cs" />
+    <Compile Include="Instance\ServiceProvider.cs" />
+    <Compile Include="Instance\TypeInstanceInfo.cs" />
+    <Compile Include="InstanseContext\InstanceContext.cs" />
+    <Compile Include="InstanseContext\SingleInstance.cs" />
+    <Compile Include="Log\Log.cs" />
+    <Compile Include="Log\LogExtensions.cs" />
+    <Compile Include="Native\Appbardata.cs" />
+    <Compile Include="Native\BooleanBoxes.cs" />
+    <Compile Include="Native\Constants.cs" />
+    <Compile Include="Native\DisplayInfo.cs" />
+    <Compile Include="Native\DoubleUtil.cs" />
+    <Compile Include="Native\ExternDll.cs" />
+    <Compile Include="Native\FullPrimaryScreenHeight.cs" />
+    <Compile Include="Native\FullPrimaryScreenHeightStr.cs" />
+    <Compile Include="Native\FullPrimaryScreenHeightWithOutDPI.cs" />
+    <Compile Include="Native\FullPrimaryScreenWidth.cs" />
+    <Compile Include="Native\FullPrimaryScreenWidthStr.cs" />
+    <Compile Include="Native\FullPrimaryScreenWidthWithOutDPI.cs" />
+    <Compile Include="Native\ICONINFO.cs" />
+    <Compile Include="Native\IID.cs" />
+    <Compile Include="Native\KeyboardHookStruct.cs" />
+    <Compile Include="Native\MonitorManager.cs" />
+    <Compile Include="Native\MouseHookStruct.cs" />
+    <Compile Include="Native\MouseKeyHook.cs" />
+    <Compile Include="Native\MouseLLHookStruct.cs" />
+    <Compile Include="Native\NativeMethods.cs" />
+    <Compile Include="Native\NativeMethodsSetLastError.cs" />
+    <Compile Include="Native\NativeTypes.cs" />
+    <Compile Include="Native\POINT.cs" />
+    <Compile Include="Native\PointUtil.cs" />
+    <Compile Include="Native\PRF.cs" />
+    <Compile Include="Native\RECT.cs" />
+    <Compile Include="Native\SafeNativeMethods.cs" />
+    <Compile Include="Native\SW.cs" />
+    <Compile Include="Native\TaskBar.cs" />
+    <Compile Include="Native\ThreadHelper.cs" />
+    <Compile Include="Native\UnsafeNativeMethods.cs" />
+    <Compile Include="Native\VisibilityBoxes.cs" />
+    <Compile Include="Native\WindowMessage.cs" />
+    <Compile Include="Parameter\AddInParameter.cs" />
+    <Compile Include="Parameter\Converter\StringToIntConverter.cs" />
+    <Compile Include="Parameter\IKeyValueCache.cs" />
+    <Compile Include="Parameter\IParameter.cs" />
+    <Compile Include="Parameter\IValueConverter.cs" />
+    <Compile Include="Parameter\Parameter.cs" />
+    <Compile Include="Parameter\ParameterAttribute.cs" />
+    <Compile Include="Parameter\ParameterBase.cs" />
+    <Compile Include="Parameter\ParameterLine.cs" />
+    <Compile Include="Parameter\PlayerParameter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Refrecter\AssemblyDistinationVersionAttribute.cs" />
+    <Compile Include="Refrecter\AssemblyInfo.cs" />
+    <Compile Include="Refrecter\AverageCounter.cs" />
+    <Compile Include="Refrecter\ConsoleHelper.cs" />
+    <Compile Include="Refrecter\EntryAssemblyInfo.cs" />
+    <Compile Include="Refrecter\InstanseCore.cs" />
+    <Compile Include="Refrecter\ProductInfo.cs" />
+    <Compile Include="Refrecter\TypeInstanceInfo.cs" />
+    <Compile Include="Refrecter\XmlCommentAttribute.cs" />
+    <Compile Include="RemoteInfo\ChannelType.cs" />
+    <Compile Include="RemoteInfo\NetworkInfo.cs" />
+    <Compile Include="RemoteInfo\RemoteCommunicator.cs" />
+    <Compile Include="UnhandledExceptionHander.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config\nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
