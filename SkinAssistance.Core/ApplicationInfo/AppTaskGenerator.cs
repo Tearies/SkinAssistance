@@ -53,7 +53,6 @@ namespace SkinAssistance.Core.ApplicationInfo
             ResizeMode = ResizeMode.NoResize;
             ShowInTaskbar = false;
             ShowActivated = true;
-            SizeToContent = SizeToContent.WidthAndHeight;
             Application.Current.MainWindow = this;
         }
 

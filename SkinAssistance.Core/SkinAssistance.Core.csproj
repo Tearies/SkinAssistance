@@ -128,6 +128,7 @@
     <Compile Include="InstanseContext\SingleInstance.cs" />
     <Compile Include="Log\Log.cs" />
     <Compile Include="Log\LogExtensions.cs" />
+    <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="Native\Appbardata.cs" />
     <Compile Include="Native\BooleanBoxes.cs" />
     <Compile Include="Native\Constants.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Parameter\ParameterBase.cs" />
     <Compile Include="Parameter\ParameterLine.cs" />
     <Compile Include="Parameter\PlayerParameter.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Refrecter\AssemblyDistinationVersionAttribute.cs" />
     <Compile Include="Refrecter\AssemblyInfo.cs" />

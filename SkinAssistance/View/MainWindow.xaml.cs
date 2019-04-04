@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SkinAssistance.Core.ApplicationInfo;
+using SkinAssistance.Core.Instance;
+using SkinAssistance.ViewModel;
 
 namespace SkinAssistance.View
 {
@@ -23,6 +25,7 @@ namespace SkinAssistance.View
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = InstanseManager.ResolveService<MainWindowViewModel>();
         }
     }
 }

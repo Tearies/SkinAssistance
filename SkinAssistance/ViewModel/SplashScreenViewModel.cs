@@ -9,10 +9,11 @@ using SkinAssistance.Core;
 using SkinAssistance.Core.ApplicationInfo;
 using SkinAssistance.Core.CommonInitialTask;
 using SkinAssistance.Core.ICommands;
+using SkinAssistance.Core.MVVM;
 
 namespace SkinAssistance.ViewModel
 {
-    public class SplashScreenViewModel : INotifyPropertyChanged
+    public class SplashScreenViewModel : ViewModelBase
     {
         #region Methods
 
@@ -79,12 +80,6 @@ namespace SkinAssistance.ViewModel
             set { _totalProgress = value; OnPropertyChanged(); }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            if (PropertyChanged != null) PropertyChanged
-                    .Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
     }
 }
