@@ -47,10 +47,8 @@ namespace SkinAssistance.Core.ApplicationInfo
         {
 
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            WindowStyle = WindowStyle.None;
             SnapsToDevicePixels = true;
             UseLayoutRounding = true;
-            ResizeMode = ResizeMode.NoResize;
             ShowInTaskbar = false;
             ShowActivated = true;
             Application.Current.MainWindow = this;
