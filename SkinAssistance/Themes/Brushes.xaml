@@ -7,6 +7,7 @@
     <SolidColorBrush x:Key="WindowForeground">#dbdbdb</SolidColorBrush>
     <SolidColorBrush x:Key="StatusBarBackground">#555555</SolidColorBrush>
     <system:Double x:Key="FontSize">24</system:Double>
+    <FontFamily x:Key="FontName">Kaiti</FontFamily>
     <SolidColorBrush x:Key="VerionForeground">GreenYellow</SolidColorBrush>
     <SolidColorBrush x:Key="OptionListBackGround" Color="#FF362F2F"></SolidColorBrush>
     <Color x:Key="AccentColor">#2D2D30</Color>

@@ -10,18 +10,22 @@
 
     <Style TargetType="ContentPresenter">
         <Setter Property="TextElement.FontSize" Value="{DynamicResource FontSize}"/>
+        <Setter Property="TextElement.FontFamily" Value="{DynamicResource FontName}"/>
     </Style>
 
     <Style TargetType="TextElement">
         <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontName}"/>
     </Style>
 
     <Style TargetType="TextBlock">
         <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontName}"/>
     </Style>
 
     <Style TargetType="ContentControl">
         <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+        <Setter Property="FontFamily" Value="{DynamicResource FontName}"/>
     </Style>
 
     <Style TargetType="{x:Type bootstrap:SplashWindow}">
