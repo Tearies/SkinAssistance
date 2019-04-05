@@ -213,12 +213,15 @@ namespace SkinAssistance.Core.Extensions
         /// <returns><c>true</c> if [is assigned from] [the specified o]; otherwise, <c>false</c>.</returns>
         public static bool IsAssignedFrom<T>(this object o)
         {
-            if (o == null)
-                return false;
-            return o.GetType().FullName == typeof(T).FullName;
+            return o.IsAssignedFrom(typeof(T));
         }
 
-
+        public static bool IsAssignedFrom(this object o,Type targetType)
+        {
+            if (o == null)
+                return false;
+            return o.GetType().FullName == targetType.FullName;
+        }
 
         #endregion
 

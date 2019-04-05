@@ -4,7 +4,26 @@
     xmlns:local="clr-namespace:SkinAssistance"
     xmlns:controls="clr-namespace:SkinAssistance.Core.Controls;assembly=SkinAssistance.Core"
     xmlns:bootstrap="clr-namespace:SkinAssistance.View"
-    xmlns:refrecter="clr-namespace:SkinAssistance.Core.Refrecter;assembly=SkinAssistance.Core">
+    xmlns:refrecter="clr-namespace:SkinAssistance.Core.Refrecter;assembly=SkinAssistance.Core"
+    xmlns:viewModel="clr-namespace:SkinAssistance.ViewModel"
+    xmlns:commands="clr-namespace:SkinAssistance.Commands">
+
+    <Style TargetType="ContentPresenter">
+        <Setter Property="TextElement.FontSize" Value="{DynamicResource FontSize}"/>
+    </Style>
+
+    <Style TargetType="TextElement">
+        <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+    </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+    </Style>
+
+    <Style TargetType="ContentControl">
+        <Setter Property="FontSize" Value="{DynamicResource FontSize}"/>
+    </Style>
+
     <Style TargetType="{x:Type bootstrap:SplashWindow}">
         <Setter Property="Template">
             <Setter.Value>
@@ -86,4 +105,125 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Foreground"
+                Value="{DynamicResource Foreground}" />
+        <Setter Property="Background"
+                Value="{DynamicResource BackgroundNormal}" />
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource BorderBrushNormal}" />
+        <Setter Property="Padding" Value="5,2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border SnapsToDevicePixels="True" Padding="{TemplateBinding Padding}"
+                            BorderThickness="1" CornerRadius="3"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource BorderBrushHighlighted}" />
+                            <Setter Property="Background"
+                                    Value="{DynamicResource BackgroundHighlighted}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    Value="{DynamicResource BackgroundSelected}" />
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource BorderBrushSelected}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+   
+    <Style TargetType="{x:Type ListViewItem}">
+        <Setter Property="Foreground"
+                Value="{DynamicResource BlackBrush}" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+        <Setter Property="MinHeight"
+                Value="25" />
+        <Setter Property="Margin"
+                Value="0" />
+        <Setter Property="Padding"
+                Value="5,2" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ListView}">
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource BlackBrush}" />
+        <Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
+        <!-- default to 0 -->
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListView}">
+                    <Border Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer>
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource GrayBrush9}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+   
+    <DataTemplate DataType="{x:Type viewModel:Operation}">
+        <Button   Content="{Binding OptionName}" Command="commands:SkinAssistanceCommands.SwitchOperationCommands" CommandParameter="{Binding}">
+            
+        </Button>
+    </DataTemplate>
 </ResourceDictionary>

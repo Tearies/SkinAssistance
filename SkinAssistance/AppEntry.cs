@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SkinAssistance.Core.ApplicationInfo;
 using SkinAssistance.Core.Refrecter;
+using SkinAssistance.Task;
 using SkinAssistance.View;
 [assembly: AssemblyDistinationVersion]
 namespace SkinAssistance
@@ -49,7 +50,7 @@ namespace SkinAssistance
                 return new List<Type>
                 {
                     //Warning: Dont't Change the Order
-
+                    typeof(InitializeThemesTask)
                 };
             }
         }

@@ -5,9 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SkinAssistance.View"
         xmlns:applicationInfo="clr-namespace:SkinAssistance.Core.ApplicationInfo;assembly=SkinAssistance.Core"
-        mc:Ignorable="d"
-        Title="MainWindow">
+        xmlns:refrecter="clr-namespace:SkinAssistance.Core.Refrecter;assembly=SkinAssistance.Core"
+        mc:Ignorable="d" Background="{DynamicResource WindowBackground}" Foreground="{DynamicResource WindowForeground}"
+        Title="{x:Static refrecter:ProductInfo.Title}">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0">
+            <ListView Background="{DynamicResource OptionListBackGround}" ItemsSource="{Binding OperationSource,Mode=OneWay}"/>
+        </Border>
+        <Border Grid.Row="1">
+            <ContentControl Content="{Binding Content,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+        </Border>
+        <Border Grid.Row="2" Background="{DynamicResource StatusBarBackground}">
+            <BulletDecorator HorizontalAlignment="Right">
+                <BulletDecorator.Bullet>
+                    <Border >
+                        <TextBlock FontSize="{DynamicResource FontSize}">
+                            <Run>Ver:</Run>
+                            <Run Foreground="{DynamicResource VerionForeground}" Text="{x:Static refrecter:ProductInfo.VersionInfoString}"/>
+                        </TextBlock>
+                    </Border>
+                </BulletDecorator.Bullet>
+                
+            </BulletDecorator>
+        </Border>
     </Grid>
 </applicationInfo:BootstrapWindow>
