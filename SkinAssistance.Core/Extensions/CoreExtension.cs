@@ -223,6 +223,11 @@ namespace SkinAssistance.Core.Extensions
             return o.GetType().FullName == targetType.FullName;
         }
 
+        public static string ToSafeString(this object obj)
+        {
+            return Convert.ToString(obj);
+        }
+
         #endregion
 
     }

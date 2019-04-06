@@ -14,5 +14,11 @@ namespace SkinAssistance.Commands
         public static readonly RelayCommand<IOperation> SwitchOperationCommands = new RelayCommand<IOperation>(nameof(SwitchOperationCommands),nameof(SwitchOperationCommands));
 
         public static readonly RelayCommand<object> SelecDirectoryCommands = new RelayCommand<object>(nameof(SelecDirectoryCommands), nameof(SelecDirectoryCommands));
+
+        public static readonly RelayCommand<object> StartSearchCommands = new RelayCommand<object>(nameof(StartSearchCommands), nameof(StartSearchCommands));
+
+        public static readonly RelayCommand<string> ShowInformationCommands = new RelayCommand<string>(nameof(ShowInformationCommands), nameof(ShowInformationCommands));
+         
+        public static readonly RelayCommand<string> ShowDetailsInformationCommands = new RelayCommand<string>(nameof(ShowDetailsInformationCommands), nameof(ShowDetailsInformationCommands));
     }
 }

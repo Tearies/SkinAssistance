@@ -11,7 +11,7 @@ namespace SkinAssistance.ViewModel
     {
         private FrameworkElement _content;
         private ObservableCollection<IOperation> _operationSource;
-
+        private string _information;
 
         public FrameworkElement Content
         {
@@ -35,7 +35,16 @@ namespace SkinAssistance.ViewModel
             }
         }
 
-
+        public string Information
+        {
+            get => _information;
+            set
+            {
+                if (value == _information) return;
+                _information = value;
+                OnPropertyChanged();
+            }
+        }
         public MainWindowViewModel()
         {
             OperationSource = new ObservableCollection<IOperation>();
@@ -43,6 +52,18 @@ namespace SkinAssistance.ViewModel
             OperationSource.Add(new Operation("皮肤制作", typeof(SkinOperationView)));
             SkinAssistanceCommands.SwitchOperationCommands.RegistorCommand(this, OnSwitchOperationCommandsExcuted,
                 OnSwitchOperationCommandsCanExcuted);
+            SkinAssistanceCommands.ShowInformationCommands.RegistorCommand(this, OnShowInformationCommandsExcuted,
+                OnShowInformationCommandsCanExcuted);
+        }
+
+        private bool OnShowInformationCommandsCanExcuted(string arg)
+        {
+            return true;
+        }
+
+        private void OnShowInformationCommandsExcuted(string obj)
+        {
+            Information = obj;
         }
 
         private bool OnSwitchOperationCommandsCanExcuted(IOperation arg)

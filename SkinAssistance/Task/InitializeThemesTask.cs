@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Threading.Tasks;
 using SkinAssistance.Core.ApplicationInfo;
 using SkinAssistance.Core.CommonInitialTask;
 using SkinAssistance.Core.ICommands;
 using SkinAssistance.Core.Theming;
 
-namespace SkinAssistance.Task
+namespace SkinAssistance
 {
     class InitializeThemesTask: InitializeTask
     {

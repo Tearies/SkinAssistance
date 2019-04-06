@@ -21,17 +21,17 @@
             <ContentControl Content="{Binding Content,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
         </Border>
         <Border Grid.Row="2" Background="{DynamicResource StatusBarBackground}">
-            <BulletDecorator HorizontalAlignment="Right">
-                <BulletDecorator.Bullet>
-                    <Border >
-                        <TextBlock FontSize="{DynamicResource FontSize}">
-                            <Run>Ver:</Run>
-                            <Run Foreground="{DynamicResource VerionForeground}" Text="{x:Static refrecter:ProductInfo.VersionInfoString}"/>
-                        </TextBlock>
-                    </Border>
-                </BulletDecorator.Bullet>
-                
-            </BulletDecorator>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1" FontSize="{DynamicResource FontSize}">
+                    <Run>Ver:</Run>
+                    <Run Foreground="{DynamicResource VerionForeground}" Text="{x:Static refrecter:ProductInfo.VersionInfoString}"/>
+                </TextBlock>
+                <TextBlock Text="{Binding Information,Mode=OneWay}"/>
+            </Grid>
         </Border>
     </Grid>
 </applicationInfo:BootstrapWindow>

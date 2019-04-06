@@ -60,7 +60,7 @@ namespace SkinAssistance.Core.ICommands
         [HandleProcessCorruptedStateExceptions]
         public static void ExcuteCommand<T>(this IRegistorCommand<T> command, object param)
         {
-            DispatcherContext.DispatcherContext.InvokeAsync(() => { ExcuteCommandWithoutDispatcher(command, param); });
+            ExcuteCommandWithoutDispatcher(command, param); 
 
         }
 
@@ -77,10 +77,6 @@ namespace SkinAssistance.Core.ICommands
                 LogExtensions.Critical(null, ex);
             }
         }
-
-        public static DispatcherOperation ExcuteCommandSync<T>(this IRegistorCommand<T> command, object param)
-        {
-            return DispatcherContext.DispatcherContext.InvokeAsync(() => { ExcuteCommandWithoutDispatcher(command, param); });
-        }
+       
     }
 }
