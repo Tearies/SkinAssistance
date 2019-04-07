@@ -18,25 +18,33 @@ namespace SkinAssistance.ViewModel
     {
 
         private BrushConverter converter;
+        private List<string> SkipFile;
         public BrushMatch()
         {
             converter = new BrushConverter();
+            SkipFile = new List<string>();
+            SkipFile.Add("Colors");
+            SkipFile.Add("Brushes");
         }
 
         public void Match(string fileName)
         {
+            if (SkipFile.Contains(Path.GetFileNameWithoutExtension(fileName)))
+            {
+                return;
+            }
             var allfileLines = File.ReadAllLines(fileName);
             var newFile = ProductInfo.DirectoryPath + @"\Relink\" + Path.GetFileName(fileName) + "_Relink" + Path.GetExtension(fileName);
             var newContent = new StringBuilder();
+            Regex reg = new Regex("[\"](.*?)[\"]");
+            Brush brush;
             foreach (var line in allfileLines)
             {
                 string source = line;
-                Regex reg = new Regex("[\"](.*?)[\"]");
                 MatchCollection mc = reg.Matches(source);
                 foreach (Match m in mc)
                 {
                     var value = m.Value.Trim('"');
-                    Brush brush;
                     if (MatchBrushes<Brush>(value, out brush))
                     {
                         var resourceid = Guid.NewGuid().ToString("N");
