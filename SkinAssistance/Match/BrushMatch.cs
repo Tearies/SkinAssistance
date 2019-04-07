@@ -39,37 +39,46 @@ namespace SkinAssistance.ViewModel
             Regex reg = new Regex("[\"](.*?)[\"]");
             Brush brush;
             bool replceContent = false;
+            bool replaced = false;
             foreach (var line in allfileLines)
             {
                 string source = line;
-                MatchCollection mc = reg.Matches(source);
-                foreach (Match m in mc)
+            Analyze:
                 {
-                    var value = m.Value.Trim('"');
-                    if (MatchBrushes<Brush>(value, out brush))
+                    replceContent = false;
+                    MatchCollection mc = reg.Matches(source);
+                    foreach (Match m in mc)
                     {
-                        replceContent = true;
-                        var resourceid = Guid.NewGuid().ToString("N");
-                        var resourceLink = $"<SolidColorBrush x:Key=\"{resourceid}\" Color=\"{value}\" />";
-                        var replaceLink = $"\"{{DynamicResource {resourceid}}}\"";
-                        try
+                        var value = m.Value.Trim('"');
+                        if (MatchBrushes<Brush>(value, out brush))
                         {
-                            source = source.Substring(0, m.Index) + replaceLink +
-                                     source.Substring(m.Index + m.Length, source.Length - m.Index - m.Length);
-                            SkinAssistanceCommands.AddToGlobalRelinkReourceCommand.ExcuteCommand(new Tuple<string, Brush>(resourceid, brush));
-                        }
-                        catch (Exception e)
-                        {
+                            replaced = true;
+                            replceContent = true;
+                            var resourceid = Guid.NewGuid().ToString("N");
+                            var resourceLink = $"<SolidColorBrush x:Key=\"{resourceid}\" Color=\"{value}\" />";
+                            var replaceLink = $"\"{{DynamicResource {resourceid}}}\"";
+                            try
+                            {
+                                source = source.Substring(0, m.Index) + replaceLink + source.Substring(m.Index + m.Length, source.Length - m.Index - m.Length);
+                                SkinAssistanceCommands.AddToGlobalRelinkReourceCommand.ExcuteCommand(new Tuple<string, Brush>(resourceid, brush));
+                            }
+                            catch (Exception e)
+                            {
 
-                        }
+                            }
 
-                        SkinAssistanceCommands.ShowDetailsInformationCommands.ExcuteCommand($"{line}|{source}");
+                            SkinAssistanceCommands.ShowDetailsInformationCommands.ExcuteCommand($"{fileName}->>{line}|{source}");
+                            break;
+                        }
                     }
+                    if (replceContent)
+                        goto Analyze;
+                    newContent.AppendLine(source);
                 }
-                newContent.AppendLine(source);
+
             }
 
-            if (replceContent)
+            if (replaced)
             {
                 newFile.PrepaireDictoryInfo();
                 File.WriteAllText(newFile, newContent.ToString());
