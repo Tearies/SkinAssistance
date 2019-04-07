@@ -38,6 +38,7 @@ namespace SkinAssistance.ViewModel
             var newContent = new StringBuilder();
             Regex reg = new Regex("[\"](.*?)[\"]");
             Brush brush;
+            bool replceContent = false;
             foreach (var line in allfileLines)
             {
                 string source = line;
@@ -47,6 +48,7 @@ namespace SkinAssistance.ViewModel
                     var value = m.Value.Trim('"');
                     if (MatchBrushes<Brush>(value, out brush))
                     {
+                        replceContent = true;
                         var resourceid = Guid.NewGuid().ToString("N");
                         var resourceLink = $"<SolidColorBrush x:Key=\"{resourceid}\" Color=\"{value}\" />";
                         var replaceLink = $"\"{{DynamicResource {resourceid}}}\"";
@@ -64,12 +66,15 @@ namespace SkinAssistance.ViewModel
                         SkinAssistanceCommands.ShowDetailsInformationCommands.ExcuteCommand($"{line}|{source}");
                     }
                 }
-
                 newContent.AppendLine(source);
             }
 
-            newFile.PrepaireDictoryInfo();
-            File.WriteAllText(newFile, newContent.ToString());
+            if (replceContent)
+            {
+                newFile.PrepaireDictoryInfo();
+                File.WriteAllText(newFile, newContent.ToString());
+            }
+            newContent.Clear();
         }
 
         private bool MatchBrushes<T>(string value, out T outBack) where T : Brush
