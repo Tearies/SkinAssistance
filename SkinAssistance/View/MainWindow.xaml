@@ -24,13 +24,18 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="1" FontSize="{DynamicResource FontSize}">
+                    <Run>RunTimes:</Run>
+                    <Run Text="{Binding RunTimes,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                </TextBlock>
+                <TextBlock Padding="5,0" Grid.Column="2" FontSize="{DynamicResource FontSize}">
                     <Run>Ver:</Run>
                     <Run Foreground="{DynamicResource VerionForeground}" Text="{x:Static refrecter:ProductInfo.VersionInfoString}"/>
                 </TextBlock>
-                <TextBlock Text="{Binding Information,Mode=OneWay}"/>
+                <TextBlock Padding="5,0" Text="{Binding Information,Mode=OneWay}"/>
             </Grid>
         </Border>
     </Grid>

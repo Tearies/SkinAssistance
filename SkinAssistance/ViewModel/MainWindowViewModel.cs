@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using SkinAssistance.Commands;
 using SkinAssistance.Core.Instance;
@@ -12,7 +16,9 @@ namespace SkinAssistance.ViewModel
         private FrameworkElement _content;
         private ObservableCollection<IOperation> _operationSource;
         private string _information;
-
+        private string _runTimes;
+        private Stopwatch RunTimerSource;
+        private CancellationTokenSource CancellationTokenSource;
         public FrameworkElement Content
         {
             get => _content;
@@ -45,8 +51,22 @@ namespace SkinAssistance.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        public string RunTimes
+        { 
+            get => _runTimes;
+            set
+            {
+                if (value.Equals(_runTimes)) return;
+                _runTimes = value;
+                OnPropertyChanged();
+            }
+        }
+
         public MainWindowViewModel()
         {
+            RunTimes = TimeSpan.FromMilliseconds(0).ToString(@"hh\:mm\:ss\.ff");
+            RunTimerSource = new Stopwatch();
             OperationSource = new ObservableCollection<IOperation>();
             OperationSource.Add(new Operation("提取资源", typeof(ExportOperationView))
             {
@@ -58,6 +78,43 @@ namespace SkinAssistance.ViewModel
                 OnSwitchOperationCommandsCanExcuted);
             SkinAssistanceCommands.ShowInformationCommands.RegistorCommand(this, OnShowInformationCommandsExcuted,
                 OnShowInformationCommandsCanExcuted);
+            SkinAssistanceCommands.StartRealTimer.RegistorCommand(this, OnStartRealTimerExcuted, OnStartRealTimerCanExcuted);
+        }
+
+        private bool OnStartRealTimerCanExcuted(bool arg)
+        {
+            return true;
+        }
+
+        private void OnStartRealTimerExcuted(bool obj)
+        {
+            
+            if (RunTimerSource.IsRunning)
+            {
+                RunTimerSource.Stop();
+            }
+
+            if (CancellationTokenSource != null)
+            {
+                if (!CancellationTokenSource.IsCancellationRequested)
+                {
+                    CancellationTokenSource.Cancel(false);
+                    CancellationTokenSource.Dispose();
+                }
+            }
+            if (obj)
+            {
+                CancellationTokenSource = new CancellationTokenSource();
+                RunTimerSource.Start();
+                ThreadPool.QueueUserWorkItem((p) =>
+                {
+                    while (!CancellationTokenSource.IsCancellationRequested)
+                    {
+                        Thread.Sleep(30);
+                        RunTimes = RunTimerSource.Elapsed.ToString(@"hh\:mm\:ss\.ff");
+                    }
+                },CancellationTokenSource.Token);
+            }
         }
 
         private bool OnShowInformationCommandsCanExcuted(string arg)

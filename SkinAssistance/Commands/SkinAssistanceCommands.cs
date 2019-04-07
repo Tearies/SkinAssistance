@@ -24,5 +24,7 @@ namespace SkinAssistance.Commands
 
         public static readonly RelayCommand<Tuple<string, Brush>> AddToGlobalRelinkReourceCommand =
             new RelayCommand<Tuple<string, Brush>>(nameof(AddToGlobalRelinkReourceCommand), nameof(AddToGlobalRelinkReourceCommand));
+
+        public static readonly RelayCommand<bool> StartRealTimer = new RelayCommand<bool>(nameof(StartRealTimer), nameof(StartRealTimer));
     }
 }

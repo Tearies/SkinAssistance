@@ -58,20 +58,24 @@ namespace SkinAssistance.ViewModel
 
         private async void OnStartSearchCommandsExcuted(object obj)
         {
-            await Task.Run(async () =>
+            await Task.Run(() =>
             {
                 try
                 {
+                    SkinAssistanceCommands.StartRealTimer.ExcuteCommand(true);
                     var options = FileMatcheOptions.Where(o => o.IsSelected);
                     var fileList = Directory.GetFiles(FindDir, "*.xaml", SearchOption.AllDirectories);
+                    SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"Analyze Start");
                     foreach (var file in fileList)
                     {
-                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"begin analyze {file}");
+                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} start");
                         FileContentMatchEngine.Instance.Match(file, options);
-                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"end analyze {file} ");
+                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} end");
                     }
 
                     globalRelink.Save();
+                    SkinAssistanceCommands.StartRealTimer.ExcuteCommand(false);
+                    SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"Analyze End");
                 }
                 catch (Exception e)
                 {
