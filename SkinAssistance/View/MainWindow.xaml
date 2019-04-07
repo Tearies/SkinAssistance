@@ -29,7 +29,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="1" FontSize="{DynamicResource FontSize}">
                     <Run>RunTimes:</Run>
-                    <Run Text="{Binding RunTimes,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Run Foreground="{DynamicResource VerionForeground}" Text="{Binding RunTimes,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </TextBlock>
                 <TextBlock Padding="5,0" Grid.Column="2" FontSize="{DynamicResource FontSize}">
                     <Run>Ver:</Run>
