@@ -27,7 +27,10 @@ namespace SkinAssistance.ViewModel
             DetailsInfo = new ObservableCollection<string>();
             BindingOperations.EnableCollectionSynchronization(DetailsInfo, locker);
             FileMatcheOptions = new ObservableCollection<FileMatchOption>();
-            FileMatcheOptions.Add(InstanseManager.ResolveService<BrushMatchOption>());
+            FileMatcheOptions.Add(InstanseManager.ResolveService<BrushMatchOption>(initializeCallback: p =>
+            {
+                p.IsEnabled = true;
+            }));
             FileMatcheOptions.Add(InstanseManager.ResolveService<ImageMatchOption>());
             SkinAssistanceCommands.SelecDirectoryCommands.RegistorCommand(this, OnSelecDirectoryCommandsExcuted, OnSelecDirectoryCommandsCanExuted);
             SkinAssistanceCommands.StartSearchCommands.RegistorCommand(this, OnStartSearchCommandsExcuted,

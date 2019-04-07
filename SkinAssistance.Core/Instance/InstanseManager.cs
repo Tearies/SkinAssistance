@@ -25,9 +25,9 @@ namespace SkinAssistance.Core.Instance
         {
             InstanceList = new List<object>();
         }
-
+         
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static T ResolveService<T>(Type targetType=null,bool isNew = false) where T : class
+        public static T ResolveService<T>(Type targetType=null,bool isNew = false,Action<T> initializeCallback=null) where T : class
         {
             if (targetType == null)
                 targetType = typeof(T);
@@ -38,6 +38,14 @@ namespace SkinAssistance.Core.Instance
                 instance = ActivatorWrapper.SolveInstance(targetType) as T;
             if (!isNew)
                 InstanceList.Add(instance);
+            if (initializeCallback != null&&instance!=null)
+            {
+                try
+                {
+                    initializeCallback(instance);
+                }
+                catch { }
+            }
             return instance;
         }
 

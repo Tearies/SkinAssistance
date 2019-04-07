@@ -48,8 +48,12 @@ namespace SkinAssistance.ViewModel
         public MainWindowViewModel()
         {
             OperationSource = new ObservableCollection<IOperation>();
-            OperationSource.Add(new Operation("提取资源",typeof(ExportOperationView)));
-            OperationSource.Add(new Operation("皮肤制作", typeof(SkinOperationView)));
+            OperationSource.Add(new Operation("提取资源", typeof(ExportOperationView))
+            {
+                IsEnabled = true
+            });
+            OperationSource.Add(new Operation("皮肤制作", typeof(SkinOperationView))
+           );
             SkinAssistanceCommands.SwitchOperationCommands.RegistorCommand(this, OnSwitchOperationCommandsExcuted,
                 OnSwitchOperationCommandsCanExcuted);
             SkinAssistanceCommands.ShowInformationCommands.RegistorCommand(this, OnShowInformationCommandsExcuted,

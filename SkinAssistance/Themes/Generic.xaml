@@ -582,12 +582,12 @@
     </Style>
 
     <DataTemplate DataType="{x:Type viewModel:Operation}">
-        <Button   Content="{Binding OptionName}" Command="commands:SkinAssistanceCommands.SwitchOperationCommands" CommandParameter="{Binding}">
+        <Button IsEnabled="{Binding IsEnabled,Mode=OneWay}"  Content="{Binding OptionName}" Command="commands:SkinAssistanceCommands.SwitchOperationCommands" CommandParameter="{Binding}">
             
         </Button>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModel:FileMatchOption}">
-        <CheckBox Content="{Binding MatchName}" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+        <CheckBox IsEnabled="{Binding IsEnabled,Mode=OneWay}" Content="{Binding MatchName}" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
     </DataTemplate>
 </ResourceDictionary>

@@ -2,6 +2,8 @@
 {
     public class ImageMatch : IMatch
     {
+        
+
         public void Match(string fileName)
         {
             

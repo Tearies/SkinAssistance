@@ -10,7 +10,18 @@ namespace SkinAssistance.ViewModel
             _optionName = optionName;
             _operationViewType = operationViewType;
         }
+        private bool _isEnabled;
 
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set
+            {
+                if (value == _isEnabled) return;
+                _isEnabled = value;
+                OnPropertyChanged();
+            }
+        }
         private string _optionName;
         private Type _operationViewType;
 
