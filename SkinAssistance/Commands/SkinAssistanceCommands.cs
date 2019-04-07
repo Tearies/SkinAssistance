@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 using SkinAssistance.Core.ICommands;
 using SkinAssistance.ViewModel;
 
@@ -20,5 +21,8 @@ namespace SkinAssistance.Commands
         public static readonly RelayCommand<string> ShowInformationCommands = new RelayCommand<string>(nameof(ShowInformationCommands), nameof(ShowInformationCommands));
          
         public static readonly RelayCommand<string> ShowDetailsInformationCommands = new RelayCommand<string>(nameof(ShowDetailsInformationCommands), nameof(ShowDetailsInformationCommands));
+
+        public static readonly RelayCommand<Tuple<string, Brush>> AddToGlobalRelinkReourceCommand =
+            new RelayCommand<Tuple<string, Brush>>(nameof(AddToGlobalRelinkReourceCommand), nameof(AddToGlobalRelinkReourceCommand));
     }
 }

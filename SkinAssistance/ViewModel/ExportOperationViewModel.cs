@@ -21,7 +21,7 @@ namespace SkinAssistance.ViewModel
         private ObservableCollection<FileMatchOption> _fileMatcheOptions;
         private ObservableCollection<string> _detailsInfo;
         private static readonly object locker = new object();
-
+        private GlobalRelinkSource globalRelink;
         public ExportOperationViewModel()
         {
             DetailsInfo = new ObservableCollection<string>();
@@ -37,6 +37,7 @@ namespace SkinAssistance.ViewModel
                 OnStartSearchCommandsCanExcuted);
             SkinAssistanceCommands.ShowDetailsInformationCommands.RegistorCommand(this,
                 OnShowDetailsInformationCommandsExcuted, OnShowDetailsInformationCommandsCanExcuted);
+            globalRelink = InstanseManager.ResolveService<GlobalRelinkSource>();
         }
 
         private bool OnShowDetailsInformationCommandsCanExcuted(string arg)
@@ -68,6 +69,8 @@ namespace SkinAssistance.ViewModel
                         FileContentMatchEngine.Instance.Match(file, options);
                         SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"end analyze {file} ");
                     }
+
+                    globalRelink.Save();
                 }
                 catch (Exception e)
                 {

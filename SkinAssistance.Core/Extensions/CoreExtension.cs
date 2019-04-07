@@ -69,9 +69,10 @@ namespace SkinAssistance.Core.Extensions
         /// <param name="dicPath">The dic path.</param>
         public static void PrepaireDictoryInfo(this string dicPath)
         {
-            if (!Directory.Exists(dicPath))
+            var dic = Path.GetDirectoryName(dicPath);
+            if (!Directory.Exists(dic))
             {
-                Directory.CreateDirectory(dicPath);
+                Directory.CreateDirectory(dic);
             }
         }
         /// <summary>
@@ -228,6 +229,13 @@ namespace SkinAssistance.Core.Extensions
             return Convert.ToString(obj);
         }
 
+        public static void PrepairDicInfo(this string newFile)
+        {
+            if (!Directory.Exists(Path.GetDirectoryName(newFile)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(newFile));
+            }
+        }
         #endregion
 
     }
