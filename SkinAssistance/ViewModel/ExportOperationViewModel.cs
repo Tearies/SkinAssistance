@@ -47,6 +47,7 @@ namespace SkinAssistance.ViewModel
 
         private void OnShowDetailsInformationCommandsExcuted(string obj)
         {
+            this.Info(obj);
             DetailsInfo.Add(obj);
         }
 
