@@ -85,9 +85,8 @@ namespace SkinAssistance.ViewModel
                     }
                     if (replceContent)
                         goto Analyze;
-                    newContent.AppendLine(source);
                 }
-
+                newContent.AppendLine(source);
             }
 
             if (replaced)
