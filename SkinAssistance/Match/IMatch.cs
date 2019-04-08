@@ -6,6 +6,7 @@
         /// 匹配文件
         /// </summary>
         /// <param name="fileName"></param>
-        void Match(string fileName);
+        /// <param name="option"></param>
+        void Match(string fileName, MatchOption option);
     }
 }

@@ -19,24 +19,45 @@ namespace SkinAssistance.ViewModel
 
         private BrushConverter converter;
         private List<string> SkipFile;
+        private Regex brushesRegx;
         public BrushMatch()
         {
+            brushesRegx = new Regex("[\"](.*?)[\"]");
             converter = new BrushConverter();
             SkipFile = new List<string>();
             SkipFile.Add("Colors");
             SkipFile.Add("Brushes");
         }
 
-        public void Match(string fileName)
+        private bool MatchBrushes<T>(string value, out T outBack) where T : Brush
+        {
+            try
+            {
+                outBack = converter.ConvertFromString(value) as T;
+                return true;
+            }
+            catch
+            {
+                outBack = default(T);
+                return false;
+            }
+        }
+
+        public void Match(string fileName, MatchOption option)
         {
             if (SkipFile.Contains(Path.GetFileNameWithoutExtension(fileName)))
             {
                 return;
             }
             var allfileLines = File.ReadAllLines(fileName);
-            var newFile = ProductInfo.DirectoryPath + @"\Relink\" + Path.GetFileName(fileName) + "_Relink" + Path.GetExtension(fileName);
+            var newFile = fileName;
+            if (option.ReplaceInNewFile)
+            {
+                newFile = ProductInfo.DirectoryPath + @"\Relink\" + Path.GetFileName(fileName) + "_Relink" + Path.GetExtension(fileName);
+            }
+
             var newContent = new StringBuilder();
-            Regex reg = new Regex("[\"](.*?)[\"]");
+
             Brush brush;
             bool replceContent = false;
             bool replaced = false;
@@ -46,7 +67,7 @@ namespace SkinAssistance.ViewModel
             Analyze:
                 {
                     replceContent = false;
-                    MatchCollection mc = reg.Matches(source);
+                    MatchCollection mc = brushesRegx.Matches(source);
                     foreach (Match m in mc)
                     {
                         var value = m.Value.Trim('"');
@@ -55,18 +76,9 @@ namespace SkinAssistance.ViewModel
                             replaced = true;
                             replceContent = true;
                             var resourceid = Guid.NewGuid().ToString("N");
-                            var resourceLink = $"<SolidColorBrush x:Key=\"{resourceid}\" Color=\"{value}\" />";
                             var replaceLink = $"\"{{DynamicResource {resourceid}}}\"";
-                            try
-                            {
-                                source = source.Substring(0, m.Index) + replaceLink + source.Substring(m.Index + m.Length, source.Length - m.Index - m.Length);
-                                SkinAssistanceCommands.AddToGlobalRelinkReourceCommand.ExcuteCommand(new Tuple<string, Brush>(resourceid, brush));
-                            }
-                            catch (Exception e)
-                            {
-
-                            }
-
+                            source = source.Substring(0, m.Index) + replaceLink + source.Substring(m.Index + m.Length, source.Length - m.Index - m.Length);
+                            SkinAssistanceCommands.AddToGlobalRelinkReourceCommand.ExcuteCommand(new Tuple<string, Brush>(resourceid, brush));
                             SkinAssistanceCommands.ShowDetailsInformationCommands.ExcuteCommand($"{fileName}->>{line}|{source}");
                             break;
                         }
@@ -85,19 +97,13 @@ namespace SkinAssistance.ViewModel
             }
             newContent.Clear();
         }
+    }
 
-        private bool MatchBrushes<T>(string value, out T outBack) where T : Brush
-        {
-            try
-            {
-                outBack = converter.ConvertFromString(value) as T;
-                return true;
-            }
-            catch
-            {
-                outBack = default(T);
-                return false;
-            }
-        }
+    public class MatchOption
+    {
+        /// <summary>
+        /// 在新的文件中替换资源
+        /// </summary>
+        public bool ReplaceInNewFile { get; set; }
     }
 }

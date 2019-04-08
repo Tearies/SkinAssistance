@@ -8,5 +8,10 @@
         {
             
         }
+
+        public void Match(string fileName, MatchOption option)
+        {
+           
+        }
     }
 }

@@ -11,13 +11,13 @@ namespace SkinAssistance.ViewModel
         {
            
         }
-
-        public void Match(string file, IEnumerable<FileMatchOption> options)
+         
+        public void Match(string file, IEnumerable<FileMatchOption> options,MatchOption matchOption)
         {
             foreach (var option in options)
             {
                 var match =MatchInstanse.ResloveMatch(option);
-                match?.Match(file);
+                match?.Match(file, matchOption);
             }
         }
 

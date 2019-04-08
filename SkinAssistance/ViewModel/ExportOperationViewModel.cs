@@ -22,8 +22,13 @@ namespace SkinAssistance.ViewModel
         private ObservableCollection<string> _detailsInfo;
         private static readonly object locker = new object();
         private GlobalRelinkSource globalRelink;
+        private MatchOption matchOption;
         public ExportOperationViewModel()
         {
+            matchOption = InstanseManager.ResolveService<MatchOption>(isNew: true, initializeCallback: p =>
+                  {
+                      p.ReplaceInNewFile = false;
+                  });
             DetailsInfo = new ObservableCollection<string>();
             BindingOperations.EnableCollectionSynchronization(DetailsInfo, locker);
             FileMatcheOptions = new ObservableCollection<FileMatchOption>();
@@ -66,10 +71,11 @@ namespace SkinAssistance.ViewModel
                     var options = FileMatcheOptions.Where(o => o.IsSelected);
                     var fileList = Directory.GetFiles(FindDir, "*.xaml", SearchOption.AllDirectories);
                     SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"Analyze Start");
+
                     foreach (var file in fileList)
                     {
                         SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} start");
-                        FileContentMatchEngine.Instance.Match(file, options);
+                        FileContentMatchEngine.Instance.Match(file, options, matchOption);
                         SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} end");
                     }
 
@@ -113,7 +119,7 @@ namespace SkinAssistance.ViewModel
         }
 
         public ObservableCollection<string> DetailsInfo
-        { 
+        {
             get => _detailsInfo;
             set
             {
