@@ -23,9 +23,11 @@ namespace SkinAssistance.ViewModel
         private static readonly object locker = new object();
         private GlobalRelinkSource globalRelink;
         private MatchOption matchOption;
+        private string _resourcePrefix;
+
         public ExportOperationViewModel()
         {
-            matchOption = InstanseManager.ResolveService<MatchOption>(isNew: true, initializeCallback: p =>
+            matchOption = InstanseManager.ResolveService<MatchOption>(isNew: false, initializeCallback: p =>
                   {
                       p.ReplaceInNewFile = false;
                   });
@@ -43,6 +45,22 @@ namespace SkinAssistance.ViewModel
             SkinAssistanceCommands.ShowDetailsInformationCommands.RegistorCommand(this,
                 OnShowDetailsInformationCommandsExcuted, OnShowDetailsInformationCommandsCanExcuted);
             globalRelink = InstanseManager.ResolveService<GlobalRelinkSource>();
+        }
+
+        public string ResourcePrefix
+        { 
+            get => _resourcePrefix;
+            set
+            {
+                if (value == _resourcePrefix) return;
+                _resourcePrefix = value;
+                OnPropertyChanged();
+                matchOption = InstanseManager.ResolveService<MatchOption>(isNew: false, initializeCallback: p =>
+                {
+                    p.ReplaceInNewFile = false;
+                    p.ResourceKeyPrefix = value;
+                });
+            }
         }
 
         private bool OnShowDetailsInformationCommandsCanExcuted(string arg)

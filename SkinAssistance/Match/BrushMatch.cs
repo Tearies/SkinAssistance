@@ -61,6 +61,7 @@ namespace SkinAssistance.ViewModel
             Brush brush;
             bool replceContent = false;
             bool replaced = false;
+            var fileShortName = Path.GetFileNameWithoutExtension(fileName);
             foreach (var line in allfileLines)
             {
                 string source = line;
@@ -75,7 +76,7 @@ namespace SkinAssistance.ViewModel
                         {
                             replaced = true;
                             replceContent = true;
-                            var resourceid = Guid.NewGuid().ToString("N");
+                            var resourceid = option.ResourceKeyPrefix + "_"+fileShortName+"_" + Guid.NewGuid().ToString("N");
                             var replaceLink = $"\"{{DynamicResource {resourceid}}}\"";
                             source = source.Substring(0, m.Index) + replaceLink + source.Substring(m.Index + m.Length, source.Length - m.Index - m.Length);
                             SkinAssistanceCommands.AddToGlobalRelinkReourceCommand.ExcuteCommand(new Tuple<string, Brush>(resourceid, brush));
@@ -104,5 +105,10 @@ namespace SkinAssistance.ViewModel
         /// 在新的文件中替换资源
         /// </summary>
         public bool ReplaceInNewFile { get; set; }
+
+        /// <summary>
+        /// 资源中的名称前缀
+        /// </summary>
+        public string ResourceKeyPrefix { get; set; }
     }
 }
