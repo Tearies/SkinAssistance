@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Scripting">
+      <HintPath>..\lib\Microsoft.Scripting.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAPICodePack-Core.1.1.0.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
@@ -80,6 +83,7 @@
     <Compile Include="Match\ImageMatch.cs" />
     <Compile Include="Match\ImageMatchOption.cs" />
     <Compile Include="Match\IMatch.cs" />
+    <Compile Include="ViewModel\FileMatchOptionSource.cs" />
     <Compile Include="ViewModel\GlobalRelinkSource.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Match\MatchAttribute.cs" />
@@ -95,6 +99,9 @@
       <DependentUpon>SkinOperationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SplashWindow.cs" />
+    <Compile Include="View\StringReourceOperationView.xaml.cs">
+      <DependentUpon>StringReourceOperationView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -147,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SkinOperationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StringReourceOperationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

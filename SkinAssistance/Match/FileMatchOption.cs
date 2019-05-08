@@ -1,4 +1,5 @@
-﻿using SkinAssistance.Core.MVVM;
+﻿using System;
+using SkinAssistance.Core.MVVM;
 
 namespace SkinAssistance.ViewModel
 {
@@ -7,7 +8,13 @@ namespace SkinAssistance.ViewModel
         private bool _isSelected;
         private string _matchName;
         private bool _isEnabled;
-         
+        private static EventHandler<bool> _selected;
+        public static event EventHandler<bool> Selected
+        {
+            add { _selected += value; }
+            remove { _selected -= value; }
+        }
+
         public bool IsEnabled
         {
             get => _isEnabled;
@@ -26,6 +33,7 @@ namespace SkinAssistance.ViewModel
             {
                 if (value == _isSelected) return;
                 _isSelected = value;
+                OnSelected(this, value);
                 OnPropertyChanged();
             }
         }
@@ -44,6 +52,12 @@ namespace SkinAssistance.ViewModel
         protected FileMatchOption(string matchName)
         {
             _matchName = matchName;
+        }
+
+        private static void OnSelected(FileMatchOption obj, bool e)
+        {
+            var handler = _selected;
+            handler?.Invoke(obj, e);
         }
     }
 }

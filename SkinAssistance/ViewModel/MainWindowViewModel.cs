@@ -14,7 +14,7 @@ namespace SkinAssistance.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private FrameworkElement _content;
-        private ObservableCollection<IOperation> _operationSource;
+        private OperationOptionSource _operationSource;
         private string _information;
         private string _runTimes;
         private Stopwatch RunTimerSource;
@@ -30,7 +30,7 @@ namespace SkinAssistance.ViewModel
             }
         }
 
-        public ObservableCollection<IOperation> OperationSource
+        public OperationOptionSource OperationSource
         {
             get => _operationSource;
             set
@@ -53,7 +53,7 @@ namespace SkinAssistance.ViewModel
         }
 
         public string RunTimes
-        { 
+        {
             get => _runTimes;
             set
             {
@@ -67,13 +67,16 @@ namespace SkinAssistance.ViewModel
         {
             RunTimes = TimeSpan.FromMilliseconds(0).ToString(@"hh\:mm\:ss\.ff");
             RunTimerSource = new Stopwatch();
-            OperationSource = new ObservableCollection<IOperation>();
+            OperationSource = new OperationOptionSource();
             OperationSource.Add(new Operation("提取颜色", typeof(ExportOperationView))
             {
                 IsEnabled = true
             });
-            OperationSource.Add(new Operation("皮肤制作", typeof(SkinOperationView))
-           );
+            OperationSource.Add(new Operation("皮肤制作", typeof(SkinOperationView)));
+            OperationSource.Add(new Operation("字符串资源提取", typeof(StringReourceOperationView))
+            {
+                IsEnabled = true
+            });
             SkinAssistanceCommands.SwitchOperationCommands.RegistorCommand(this, OnSwitchOperationCommandsExcuted,
                 OnSwitchOperationCommandsCanExcuted);
             SkinAssistanceCommands.ShowInformationCommands.RegistorCommand(this, OnShowInformationCommandsExcuted,
@@ -88,7 +91,7 @@ namespace SkinAssistance.ViewModel
 
         private void OnStartRealTimerExcuted(bool obj)
         {
-            
+
             if (RunTimerSource.IsRunning)
             {
                 RunTimerSource.Stop();
@@ -113,7 +116,7 @@ namespace SkinAssistance.ViewModel
                         Thread.Sleep(30);
                         RunTimes = RunTimerSource.Elapsed.ToString(@"hh\:mm\:ss\.ff");
                     }
-                },CancellationTokenSource.Token);
+                }, CancellationTokenSource.Token);
             }
         }
 
@@ -134,6 +137,7 @@ namespace SkinAssistance.ViewModel
 
         private void OnSwitchOperationCommandsExcuted(IOperation obj)
         {
+            obj.IsSelected = true;
             Content = InstanseManager.ResolveService<FrameworkElement>(obj.OperationViewType);
         }
     }

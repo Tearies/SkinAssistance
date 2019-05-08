@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using Microsoft.Scripting;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SkinAssistance.Commands;
 using SkinAssistance.Core;
@@ -18,7 +19,7 @@ namespace SkinAssistance.ViewModel
     public class ExportOperationViewModel : ViewModelBase
     {
         private string _findDir;
-        private ObservableCollection<FileMatchOption> _fileMatcheOptions;
+        private FileMatchOptionSource _fileMatcheOptions;
         private ObservableCollection<string> _detailsInfo;
         private static readonly object locker = new object();
         private GlobalRelinkSource globalRelink;
@@ -33,7 +34,7 @@ namespace SkinAssistance.ViewModel
                   });
             DetailsInfo = new ObservableCollection<string>();
             BindingOperations.EnableCollectionSynchronization(DetailsInfo, locker);
-            FileMatcheOptions = new ObservableCollection<FileMatchOption>();
+            FileMatcheOptions = new FileMatchOptionSource();
             FileMatcheOptions.Add(InstanseManager.ResolveService<BrushMatchOption>(initializeCallback: p =>
             {
                 p.IsEnabled = true;
@@ -45,6 +46,7 @@ namespace SkinAssistance.ViewModel
             SkinAssistanceCommands.ShowDetailsInformationCommands.RegistorCommand(this,
                 OnShowDetailsInformationCommandsExcuted, OnShowDetailsInformationCommandsCanExcuted);
             globalRelink = InstanseManager.ResolveService<GlobalRelinkSource>();
+           
         }
 
         public string ResourcePrefix
@@ -147,7 +149,7 @@ namespace SkinAssistance.ViewModel
             }
         }
 
-        public ObservableCollection<FileMatchOption> FileMatcheOptions
+        public FileMatchOptionSource FileMatcheOptions
         {
             get => _fileMatcheOptions;
             set

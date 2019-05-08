@@ -10,6 +10,25 @@ namespace SkinAssistance.ViewModel
             _optionName = optionName;
             _operationViewType = operationViewType;
         }
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (value == _isSelected) return;
+                _isSelected = value;
+                OnSelected(this, value);
+                OnPropertyChanged();
+            }
+        }
+        private static EventHandler<bool> _selected;
+        public static event EventHandler<bool> Selected
+        {
+            add { _selected += value; }
+            remove { _selected -= value; }
+        }
+
+        private bool _isSelected;
         private bool _isEnabled;
 
         public bool IsEnabled
@@ -45,6 +64,11 @@ namespace SkinAssistance.ViewModel
                 _operationViewType = value;
                 OnPropertyChanged();
             }
+        }
+        private static void OnSelected(Operation obj, bool e)
+        {
+            var handler = _selected;
+            handler?.Invoke(obj, e);
         }
     }
 }

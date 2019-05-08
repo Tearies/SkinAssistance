@@ -13,5 +13,10 @@ namespace SkinAssistance.ViewModel
         /// 操作器视图类型
         /// </summary>
         Type OperationViewType { get; }
+
+        /// <summary>
+        /// 是否选中
+        /// </summary>
+        bool IsSelected { get; set; }
     }
 }

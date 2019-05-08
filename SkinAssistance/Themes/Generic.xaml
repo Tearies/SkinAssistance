@@ -582,9 +582,14 @@
     </Style>
 
     <DataTemplate DataType="{x:Type viewModel:Operation}">
-        <Button IsEnabled="{Binding IsEnabled,Mode=OneWay}"  Content="{Binding OptionName}" Command="commands:SkinAssistanceCommands.SwitchOperationCommands" CommandParameter="{Binding}">
+        <Button x:Name="target" IsEnabled="{Binding IsEnabled,Mode=OneWay}"  Content="{Binding OptionName}" Command="commands:SkinAssistanceCommands.SwitchOperationCommands" CommandParameter="{Binding}">
             
         </Button>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsSelected,Mode=OneWay}" Value="True">
+                <Setter TargetName="target" Property="Background" Value="#ff0088ff"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModel:FileMatchOption}">
