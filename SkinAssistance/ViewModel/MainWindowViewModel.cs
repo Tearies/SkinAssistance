@@ -68,7 +68,7 @@ namespace SkinAssistance.ViewModel
             RunTimes = TimeSpan.FromMilliseconds(0).ToString(@"hh\:mm\:ss\.ff");
             RunTimerSource = new Stopwatch();
             OperationSource = new ObservableCollection<IOperation>();
-            OperationSource.Add(new Operation("提取资源", typeof(ExportOperationView))
+            OperationSource.Add(new Operation("提取颜色", typeof(ExportOperationView))
             {
                 IsEnabled = true
             });
