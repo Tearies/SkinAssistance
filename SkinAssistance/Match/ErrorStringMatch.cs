@@ -15,7 +15,7 @@ namespace SkinAssistance.ViewModel
         /// <param name="option"></param>
         public void Match(string fileName, IMatchOption option)
         {
-            SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>(fileName);
+            SkinAssistanceCommands.ShowDetailsInformationCommands.ExcuteCommand<string>(fileName);
         }
 
         #endregion

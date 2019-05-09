@@ -34,6 +34,8 @@ namespace SkinAssistance.ViewModel
             SkinAssistanceCommands.SelecDirectoryCommands.RegistorCommand(this, OnSelecDirectoryCommandsExcuted, OnSelecDirectoryCommandsCanExuted);
             SkinAssistanceCommands.StartSearchCommands.RegistorCommand(this, OnStartSearchCommandsExcuted,
                 OnStartSearchCommandsCanExcuted);
+            SkinAssistanceCommands.ShowDetailsInformationCommands.RegistorCommand(this,
+                OnShowDetailsInformationCommandsExcuted, OnShowDetailsInformationCommandsCanExcuted);
         }
         private bool OnSelecDirectoryCommandsCanExuted(object arg)
         {
@@ -55,7 +57,16 @@ namespace SkinAssistance.ViewModel
         {
             return !string.IsNullOrEmpty(FindDir.ToSafeString()) && FileMatcheOptions.Any(o => o.IsSelected);
         }
+        private bool OnShowDetailsInformationCommandsCanExcuted(string arg)
+        {
+            return true;
+        }
 
+        private void OnShowDetailsInformationCommandsExcuted(string obj)
+        {
+            this.Info(obj);
+            DetailsInfo.Add(obj);
+        }
         private async void OnStartSearchCommandsExcuted(object obj)
         {
             await Task.Run(() =>
