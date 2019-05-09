@@ -60,9 +60,4 @@ namespace SkinAssistance.ViewModel
             handler?.Invoke(obj, e);
         }
     }
-
-    public interface IFileMatchOption
-    {
-         string MatchName { get; }
-    }
 }
