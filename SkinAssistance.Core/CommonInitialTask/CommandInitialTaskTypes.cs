@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using SkinAssistance.Core.ICommands;
 
 #endregion
 
@@ -40,10 +39,5 @@ namespace SkinAssistance.Core.CommonInitialTask
         private static readonly Type RegistorExceptionHandlerTask = typeof(RegistorExceptionHandlerTask);
 
         #endregion
-    }
-
-    public class TaskCommands
-    {
-        public static readonly RelayCommand<string> SplashMessageCommand = new RelayCommand<string>();
     }
 }

@@ -12,54 +12,6 @@ namespace SkinAssistance.Core.ApplicationInfo
 
     #endregion
 
-    internal interface IProgress
-    {
-        #region Properties
-
-        /// <summary>
-        ///     进度权重
-        /// </summary>
-        double ProgressWeight { get; }
-
-        #endregion
-
-        #region Method
-
-        /// <summary>
-        ///     配置文件进度汇报
-        /// </summary>
-        event EventHandler<ProgressChangedArgs> ProgressChanged;
-
-        #endregion
-    }
-
-    /// <summary>
-    ///     汇报参数
-    /// </summary>
-    public class ProgressChangedArgs : EventArgs
-    {
-        #region Properties
-
-        /// <summary>
-        ///     当前进度
-        /// </summary>
-        public double Progress { get; private set; }
-
-        #endregion
-
-        #region Method
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="T:System.EventArgs" /> class.
-        /// </summary>
-        public ProgressChangedArgs(double progress)
-        {
-            Progress = progress;
-        }
-
-        #endregion
-    }
-
 
     public abstract class InitializeTask : IProgress
     {
