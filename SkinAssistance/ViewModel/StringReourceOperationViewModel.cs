@@ -31,11 +31,12 @@ namespace SkinAssistance.ViewModel
             {
                 p.IsEnabled = true;
             }));
-            SkinAssistanceCommands.SelecDirectoryCommands.RegistorCommand(this, OnSelecDirectoryCommandsExcuted, OnSelecDirectoryCommandsCanExuted);
-            SkinAssistanceCommands.StartSearchCommands.RegistorCommand(this, OnStartSearchCommandsExcuted,
+            SkinAssistanceCommands.SelecDirectoryCommand.RegistorCommand(this, OnSelecDirectoryCommandsExcuted, OnSelecDirectoryCommandsCanExuted);
+            SkinAssistanceCommands.StartSearchCommand.RegistorCommand(this, OnStartSearchCommandsExcuted,
                 OnStartSearchCommandsCanExcuted);
-            SkinAssistanceCommands.ShowDetailsInformationCommands.RegistorCommand(this,
+            SkinAssistanceCommands.ShowDetailsInformationCommand.RegistorCommand(this,
                 OnShowDetailsInformationCommandsExcuted, OnShowDetailsInformationCommandsCanExcuted);
+        
         }
         private bool OnSelecDirectoryCommandsCanExuted(object arg)
         {
@@ -73,20 +74,22 @@ namespace SkinAssistance.ViewModel
             {
                 try
                 {
-                    SkinAssistanceCommands.StartRealTimer.ExcuteCommand(true);
+                    DetailsInfo.Clear();
+                    FileContentMatchEngine.Instance.MatchesCount = 0;
+                    SkinAssistanceCommands.StartRealTimerCommand.ExcuteCommand(true);
                     var options = FileMatcheOptions.Where(o => o.IsSelected);
                     var fileList = Directory.GetFiles(FindDir, "*.cs", SearchOption.AllDirectories);
-                    SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"Analyze Start");
+                    SkinAssistanceCommands.ShowInformationCommand.ExcuteCommand<string>($"Analyze Start");
 
                     foreach (var file in fileList)
                     {
-                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} start");
+                        SkinAssistanceCommands.ShowInformationCommand.ExcuteCommand<string>($"analyze {file} start");
                         FileContentMatchEngine.Instance.Match(file, options, matchoption);
-                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} end");
+                        SkinAssistanceCommands.ShowInformationCommand.ExcuteCommand<string>($"analyze {file} end");
                     }
 
-                    SkinAssistanceCommands.StartRealTimer.ExcuteCommand(false);
-                    SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"Analyze End");
+                    SkinAssistanceCommands.StartRealTimerCommand.ExcuteCommand(false);
+                    SkinAssistanceCommands.ShowInformationCommand.ExcuteCommand<string>($"Analyze End");
                 }
                 catch (Exception e)
                 {

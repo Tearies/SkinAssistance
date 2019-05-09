@@ -582,7 +582,7 @@
     </Style>
 
     <DataTemplate DataType="{x:Type viewModel:Operation}">
-        <Button x:Name="target" IsEnabled="{Binding IsEnabled,Mode=OneWay}"  Content="{Binding OptionName}" Command="commands:SkinAssistanceCommands.SwitchOperationCommands" CommandParameter="{Binding}">
+        <Button x:Name="target" IsEnabled="{Binding IsEnabled,Mode=OneWay}"  Content="{Binding OptionName}" Command="commands:SkinAssistanceCommands.SwitchOperationCommand" CommandParameter="{Binding}">
             
         </Button>
         <DataTemplate.Triggers>

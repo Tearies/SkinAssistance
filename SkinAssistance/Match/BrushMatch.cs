@@ -43,7 +43,7 @@ namespace SkinAssistance.ViewModel
             }
         }
 
-        public void Match(string fileName, IMatchOption option)
+        public void Match(IMatchCount matchCount,string fileName, IMatchOption option)
         {
             if (SkipFile.Contains(Path.GetFileNameWithoutExtension(fileName)))
             {
@@ -74,13 +74,14 @@ namespace SkinAssistance.ViewModel
                         var value = m.Value.Trim('"');
                         if (MatchBrushes<Brush>(value, out brush))
                         {
+                            matchCount.MatchesCount++;
                             replaced = true;
                             replceContent = true;
                             var resourceid = option.GetOption<string>("ResourceKeyPrefix") + "_"+fileShortName+"_" + Guid.NewGuid().ToString("N");
                             var replaceLink = $"\"{{DynamicResource {resourceid}}}\"";
                             source = source.Substring(0, m.Index) + replaceLink + source.Substring(m.Index + m.Length, source.Length - m.Index - m.Length);
                             SkinAssistanceCommands.AddToGlobalRelinkReourceCommand.ExcuteCommand(new Tuple<string, Brush>(resourceid, brush));
-                            SkinAssistanceCommands.ShowDetailsInformationCommands.ExcuteCommand($"{fileName}->>{line}|{source}");
+                            SkinAssistanceCommands.ShowDetailsInformationCommand.ExcuteCommand($"{fileName}->>{line}|{source}");
                             break;
                         }
                     }

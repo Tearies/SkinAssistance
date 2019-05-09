@@ -41,6 +41,19 @@ namespace SkinAssistance.ViewModel
             }
         }
 
+        private long _matchsCount;
+
+        public long MatchsCount
+        { 
+            get => _matchsCount;
+            set
+            {
+                if (value == _matchsCount) return;
+                _matchsCount = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Information
         {
             get => _information;
@@ -77,11 +90,23 @@ namespace SkinAssistance.ViewModel
             {
                 IsEnabled = true
             });
-            SkinAssistanceCommands.SwitchOperationCommands.RegistorCommand(this, OnSwitchOperationCommandsExcuted,
+            SkinAssistanceCommands.SwitchOperationCommand.RegistorCommand(this, OnSwitchOperationCommandsExcuted,
                 OnSwitchOperationCommandsCanExcuted);
-            SkinAssistanceCommands.ShowInformationCommands.RegistorCommand(this, OnShowInformationCommandsExcuted,
+            SkinAssistanceCommands.ShowInformationCommand.RegistorCommand(this, OnShowInformationCommandsExcuted,
                 OnShowInformationCommandsCanExcuted);
-            SkinAssistanceCommands.StartRealTimer.RegistorCommand(this, OnStartRealTimerExcuted, OnStartRealTimerCanExcuted);
+            SkinAssistanceCommands.StartRealTimerCommand.RegistorCommand(this, OnStartRealTimerExcuted, OnStartRealTimerCanExcuted);
+            SkinAssistanceCommands.UpdateMatchesCountCommand.RegistorCommand(this,
+                OnUpdateMatchesCountCommandExcuted, OnUpdateMatchesCountCommandCanExcuted);
+        }
+
+        private bool OnUpdateMatchesCountCommandCanExcuted(long arg)
+        {
+            return true;
+        }
+
+        private void OnUpdateMatchesCountCommandExcuted(long obj)
+        {
+            MatchsCount = obj;
         }
 
         private bool OnStartRealTimerCanExcuted(bool arg)

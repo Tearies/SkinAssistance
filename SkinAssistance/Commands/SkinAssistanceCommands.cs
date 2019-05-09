@@ -12,19 +12,21 @@ namespace SkinAssistance.Commands
 {
     public static class SkinAssistanceCommands
     {
-        public static readonly RelayCommand<IOperation> SwitchOperationCommands = new RelayCommand<IOperation>(nameof(SwitchOperationCommands),nameof(SwitchOperationCommands));
+        public static readonly RelayCommand<IOperation> SwitchOperationCommand = new RelayCommand<IOperation>(nameof(SwitchOperationCommand), nameof(SwitchOperationCommand));
 
-        public static readonly RelayCommand<object> SelecDirectoryCommands = new RelayCommand<object>(nameof(SelecDirectoryCommands), nameof(SelecDirectoryCommands));
+        public static readonly RelayCommand<object> SelecDirectoryCommand = new RelayCommand<object>(nameof(SelecDirectoryCommand), nameof(SelecDirectoryCommand));
 
-        public static readonly RelayCommand<object> StartSearchCommands = new RelayCommand<object>(nameof(StartSearchCommands), nameof(StartSearchCommands));
+        public static readonly RelayCommand<object> StartSearchCommand = new RelayCommand<object>(nameof(StartSearchCommand), nameof(StartSearchCommand));
 
-        public static readonly RelayCommand<string> ShowInformationCommands = new RelayCommand<string>(nameof(ShowInformationCommands), nameof(ShowInformationCommands));
-         
-        public static readonly RelayCommand<string> ShowDetailsInformationCommands = new RelayCommand<string>(nameof(ShowDetailsInformationCommands), nameof(ShowDetailsInformationCommands));
+        public static readonly RelayCommand<string> ShowInformationCommand = new RelayCommand<string>(nameof(ShowInformationCommand), nameof(ShowInformationCommand));
+
+        public static readonly RelayCommand<string> ShowDetailsInformationCommand = new RelayCommand<string>(nameof(ShowDetailsInformationCommand), nameof(ShowDetailsInformationCommand));
 
         public static readonly RelayCommand<Tuple<string, Brush>> AddToGlobalRelinkReourceCommand =
             new RelayCommand<Tuple<string, Brush>>(nameof(AddToGlobalRelinkReourceCommand), nameof(AddToGlobalRelinkReourceCommand));
 
-        public static readonly RelayCommand<bool> StartRealTimer = new RelayCommand<bool>(nameof(StartRealTimer), nameof(StartRealTimer));
+        public static readonly RelayCommand<bool> StartRealTimerCommand = new RelayCommand<bool>(nameof(StartRealTimerCommand), nameof(StartRealTimerCommand));
+        public static readonly RelayCommand<long> UpdateMatchesCountCommand = new RelayCommand<long>(nameof(UpdateMatchesCountCommand), nameof(UpdateMatchesCountCommand));
+
     }
 }

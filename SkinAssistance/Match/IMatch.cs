@@ -7,6 +7,6 @@
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="option"></param>
-        void Match(string fileName, IMatchOption option);
+        void Match(IMatchCount matchCount, string fileName, IMatchOption option);
     }
 }

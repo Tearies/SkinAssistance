@@ -26,12 +26,17 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="1" FontSize="{DynamicResource FontSize}">
+                    <Run>MatchsCount:</Run>
+                    <Run Foreground="{DynamicResource VerionForeground}" Text="{Binding MatchsCount,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
+                </TextBlock>
+                <TextBlock Grid.Column="2" FontSize="{DynamicResource FontSize}">
                     <Run>RunTimes:</Run>
                     <Run Foreground="{DynamicResource VerionForeground}" Text="{Binding RunTimes,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </TextBlock>
-                <TextBlock Padding="5,0" Grid.Column="2" FontSize="{DynamicResource FontSize}">
+                <TextBlock Padding="5,0" Grid.Column="3" FontSize="{DynamicResource FontSize}">
                     <Run>Ver:</Run>
                     <Run Foreground="{DynamicResource VerionForeground}" Text="{x:Static refrecter:ProductInfo.VersionInfoString}"/>
                 </TextBlock>
