@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
@@ -35,6 +36,7 @@ namespace SkinAssistance.ViewModel
             var fileShortName = Path.GetFileNameWithoutExtension(fileName);
             bool replceContent = false;
             var newFile = fileName;
+            StringBuilder sb = new StringBuilder();
             foreach (var line in allfileLines)
             {
                 string source = line;
@@ -47,12 +49,19 @@ namespace SkinAssistance.ViewModel
                     {
                         matchCount.MatchesCount++;
                         var strResource = m.Value.Substring(7, m.Length - 9);
-                        var strResourceKey = justStringRegx.Match(strResource).Value.ToLower();
+                        var matches = justStringRegx.Matches(strResource);
+                        
+                        foreach (Match c in matches)
+                        {
+                            sb.Append(c.Value.ToLower());
+                        }
+                        var strResourceKey = sb.ToString();
+                        sb.Clear();
                         replceContent = true;
-                        SkinAssistanceCommands.ShowDetailsInformationCommand.ExcuteCommand($"{m.Value}->>{strResource}|{strResourceKey}");
-                        var resourceid = $"ResourceManager.Default.GetResource(\"{strResourceKey}\", \"{strResource}\"));";
-                        var replaceLink = $"\"Error{resourceid});";
+                        var resourceid = $"ResourceManager.Default.GetResource(\"{strResourceKey}\", \"{strResource}\")";
+                        var replaceLink = $"Error({resourceid})";
                         source = source.Substring(0, m.Index) + replaceLink + source.Substring(m.Index + m.Length, source.Length - m.Index - m.Length);
+                        SkinAssistanceCommands.ShowDetailsInformationCommand.ExcuteCommand($"{m.Value}->>{source}");
                         replaced = true;
                     }
                     if (replceContent)
@@ -63,8 +72,8 @@ namespace SkinAssistance.ViewModel
 
             if (replaced)
             {
-                //newFile.PrepaireDictoryInfo();
-                //File.WriteAllText(newFile, newContent.ToString());
+                newFile.PrepaireDictoryInfo();
+                File.WriteAllText(newFile, newContent.ToString());
             }
             newContent.Clear();
         }
