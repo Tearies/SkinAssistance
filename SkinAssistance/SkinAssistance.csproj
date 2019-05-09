@@ -72,6 +72,8 @@
   <ItemGroup>
     <Compile Include="AppEntry.cs" />
     <Compile Include="Commands\SkinAssistanceCommands.cs" />
+    <Compile Include="Match\ErrorStringMatch.cs" />
+    <Compile Include="Match\ErrorStringMatchOption.cs" />
     <Compile Include="Task\InitializeThemesTask.cs" />
     <Compile Include="Operation\Operation.cs" />
     <Compile Include="Match\BrushMatch.cs" />
@@ -88,7 +90,9 @@
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Match\MatchAttribute.cs" />
     <Compile Include="Match\MatchInstanse.cs" />
+    <Compile Include="ViewModel\OperationOptionSource.cs" />
     <Compile Include="ViewModel\SplashScreenViewModel.cs" />
+    <Compile Include="ViewModel\StringReourceOperationViewModel.cs" />
     <Compile Include="View\ExportOperationView.xaml.cs">
       <DependentUpon>ExportOperationView.xaml</DependentUpon>
     </Compile>

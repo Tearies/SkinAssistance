@@ -3,7 +3,7 @@ using SkinAssistance.Core.MVVM;
 
 namespace SkinAssistance.ViewModel
 {
-    public class FileMatchOption : ViewModelBase
+    public class FileMatchOption : ViewModelBase, IFileMatchOption
     {
         private bool _isSelected;
         private string _matchName;
@@ -59,5 +59,10 @@ namespace SkinAssistance.ViewModel
             var handler = _selected;
             handler?.Invoke(obj, e);
         }
+    }
+
+    public interface IFileMatchOption
+    {
+         string MatchName { get; }
     }
 }

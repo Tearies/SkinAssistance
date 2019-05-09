@@ -12,7 +12,7 @@ namespace SkinAssistance.ViewModel
            
         }
          
-        public void Match(string file, IEnumerable<FileMatchOption> options,MatchOption matchOption)
+        public void Match(string file, IEnumerable<IFileMatchOption> options,IMatchOption matchOption)
         {
             foreach (var option in options)
             {

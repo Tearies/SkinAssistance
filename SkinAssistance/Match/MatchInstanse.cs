@@ -5,7 +5,7 @@ namespace SkinAssistance.ViewModel
 {
     public class MatchInstanse
     { 
-        public static IMatch ResloveMatch(FileMatchOption option)
+        public static IMatch ResloveMatch(IFileMatchOption option)
         {
             var fileMatchAttr = option.GetCustermAttribute<MatchAttribute>();
             if (fileMatchAttr == null)

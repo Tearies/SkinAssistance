@@ -9,7 +9,7 @@
             
         }
 
-        public void Match(string fileName, MatchOption option)
+        public void Match(string fileName, IMatchOption option)
         {
            
         }

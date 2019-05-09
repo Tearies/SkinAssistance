@@ -2,10 +2,8 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using Microsoft.Scripting;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SkinAssistance.Commands;
 using SkinAssistance.Core;
@@ -16,100 +14,27 @@ using SkinAssistance.Core.MVVM;
 
 namespace SkinAssistance.ViewModel
 {
-    public class ExportOperationViewModel : ViewModelBase
+    public class StringReourceOperationViewModel : ViewModelBase
     {
         private string _findDir;
         private FileMatchOptionSource _fileMatcheOptions;
         private ObservableCollection<string> _detailsInfo;
         private static readonly object locker = new object();
-        private GlobalRelinkSource globalRelink;
-        private BrushMatchOptionOption matchOption;
-        private string _resourcePrefix;
-
-        public ExportOperationViewModel()
+        private ErrorStringMatchMatchOption matchoption;
+        public StringReourceOperationViewModel()
         {
-            matchOption = InstanseManager.ResolveService<BrushMatchOptionOption>(isNew: false, initializeCallback: p =>
-                  {
-                      p.ReplaceInNewFile = false;
-                  });
+            matchoption = InstanseManager.ResolveService<ErrorStringMatchMatchOption>();
             DetailsInfo = new ObservableCollection<string>();
             BindingOperations.EnableCollectionSynchronization(DetailsInfo, locker);
             FileMatcheOptions = new FileMatchOptionSource();
-            FileMatcheOptions.Add(InstanseManager.ResolveService<BrushMatchOption>(initializeCallback: p =>
+            FileMatcheOptions.Add(InstanseManager.ResolveService<ErrorStringMatchOption>(initializeCallback: p =>
             {
                 p.IsEnabled = true;
             }));
-            FileMatcheOptions.Add(InstanseManager.ResolveService<ImageMatchOption>());
             SkinAssistanceCommands.SelecDirectoryCommands.RegistorCommand(this, OnSelecDirectoryCommandsExcuted, OnSelecDirectoryCommandsCanExuted);
             SkinAssistanceCommands.StartSearchCommands.RegistorCommand(this, OnStartSearchCommandsExcuted,
                 OnStartSearchCommandsCanExcuted);
-            SkinAssistanceCommands.ShowDetailsInformationCommands.RegistorCommand(this,
-                OnShowDetailsInformationCommandsExcuted, OnShowDetailsInformationCommandsCanExcuted);
-            globalRelink = InstanseManager.ResolveService<GlobalRelinkSource>();
-
         }
-
-        public string ResourcePrefix
-        {
-            get => _resourcePrefix;
-            set
-            {
-                if (value == _resourcePrefix) return;
-                _resourcePrefix = value;
-                OnPropertyChanged();
-                matchOption = InstanseManager.ResolveService<BrushMatchOptionOption>(isNew: false, initializeCallback: p =>
-                {
-                    p.ReplaceInNewFile = false;
-                    p.ResourceKeyPrefix = value;
-                });
-            }
-        }
-
-        private bool OnShowDetailsInformationCommandsCanExcuted(string arg)
-        {
-            return true;
-        }
-
-        private void OnShowDetailsInformationCommandsExcuted(string obj)
-        {
-            this.Info(obj);
-            DetailsInfo.Add(obj);
-        }
-
-        private bool OnStartSearchCommandsCanExcuted(object arg)
-        {
-            return !string.IsNullOrEmpty(FindDir.ToSafeString()) && FileMatcheOptions.Any(o => o.IsSelected);
-        }
-
-        private async void OnStartSearchCommandsExcuted(object obj)
-        {
-            await Task.Run(() =>
-            {
-                try
-                {
-                    SkinAssistanceCommands.StartRealTimer.ExcuteCommand(true);
-                    var options = FileMatcheOptions.Where(o => o.IsSelected);
-                    var fileList = Directory.GetFiles(FindDir, "*.xaml", SearchOption.AllDirectories);
-                    SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"Analyze Start");
-
-                    foreach (var file in fileList)
-                    {
-                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} start");
-                        FileContentMatchEngine.Instance.Match(file, options, matchOption);
-                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} end");
-                    }
-
-                    globalRelink.Save();
-                    SkinAssistanceCommands.StartRealTimer.ExcuteCommand(false);
-                    SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"Analyze End");
-                }
-                catch (Exception e)
-                {
-                    this.Error(e);
-                }
-            });
-        }
-
         private bool OnSelecDirectoryCommandsCanExuted(object arg)
         {
             return true;
@@ -126,6 +51,38 @@ namespace SkinAssistance.ViewModel
             }
         }
 
+        private bool OnStartSearchCommandsCanExcuted(object arg)
+        {
+            return !string.IsNullOrEmpty(FindDir.ToSafeString()) && FileMatcheOptions.Any(o => o.IsSelected);
+        }
+
+        private async void OnStartSearchCommandsExcuted(object obj)
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    SkinAssistanceCommands.StartRealTimer.ExcuteCommand(true);
+                    var options = FileMatcheOptions.Where(o => o.IsSelected);
+                    var fileList = Directory.GetFiles(FindDir, "*.cs", SearchOption.AllDirectories);
+                    SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"Analyze Start");
+
+                    foreach (var file in fileList)
+                    {
+                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} start");
+                        FileContentMatchEngine.Instance.Match(file, options, matchoption);
+                        SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"analyze {file} end");
+                    }
+
+                    SkinAssistanceCommands.StartRealTimer.ExcuteCommand(false);
+                    SkinAssistanceCommands.ShowInformationCommands.ExcuteCommand<string>($"Analyze End");
+                }
+                catch (Exception e)
+                {
+                    this.Error(e);
+                }
+            });
+        }
 
         public string FindDir
         {
@@ -137,7 +94,6 @@ namespace SkinAssistance.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public ObservableCollection<string> DetailsInfo
         {
             get => _detailsInfo;

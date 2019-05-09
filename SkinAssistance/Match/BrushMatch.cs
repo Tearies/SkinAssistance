@@ -43,7 +43,7 @@ namespace SkinAssistance.ViewModel
             }
         }
 
-        public void Match(string fileName, MatchOption option)
+        public void Match(string fileName, IMatchOption option)
         {
             if (SkipFile.Contains(Path.GetFileNameWithoutExtension(fileName)))
             {
@@ -51,7 +51,7 @@ namespace SkinAssistance.ViewModel
             }
             var allfileLines = File.ReadAllLines(fileName);
             var newFile = fileName;
-            if (option.ReplaceInNewFile)
+            if (option.GetOption<bool>("ReplaceInNewFile"))
             {
                 newFile = ProductInfo.DirectoryPath + @"\Relink\" + Path.GetFileName(fileName) + "_Relink" + Path.GetExtension(fileName);
             }
@@ -76,7 +76,7 @@ namespace SkinAssistance.ViewModel
                         {
                             replaced = true;
                             replceContent = true;
-                            var resourceid = option.ResourceKeyPrefix + "_"+fileShortName+"_" + Guid.NewGuid().ToString("N");
+                            var resourceid = option.GetOption<string>("ResourceKeyPrefix") + "_"+fileShortName+"_" + Guid.NewGuid().ToString("N");
                             var replaceLink = $"\"{{DynamicResource {resourceid}}}\"";
                             source = source.Substring(0, m.Index) + replaceLink + source.Substring(m.Index + m.Length, source.Length - m.Index - m.Length);
                             SkinAssistanceCommands.AddToGlobalRelinkReourceCommand.ExcuteCommand(new Tuple<string, Brush>(resourceid, brush));
@@ -99,7 +99,7 @@ namespace SkinAssistance.ViewModel
         }
     }
 
-    public class MatchOption
+    public class BrushMatchOptionOption : IMatchOption
     {
         /// <summary>
         /// 在新的文件中替换资源
@@ -110,5 +110,27 @@ namespace SkinAssistance.ViewModel
         /// 资源中的名称前缀
         /// </summary>
         public string ResourceKeyPrefix { get; set; }
+
+        #region Implementation of IMatchOption
+
+        public T GetOption<T>(string optionName)
+        {
+            switch (optionName)
+            {
+                case nameof(ReplaceInNewFile):
+                    return (T)Convert.ChangeType(ReplaceInNewFile,typeof(T));
+                case nameof(ResourceKeyPrefix):
+                    return (T)Convert.ChangeType(ResourceKeyPrefix, typeof(T));
+            }
+
+            return default(T);
+        }
+
+        #endregion
+    }
+
+    public interface IMatchOption
+    {
+        T GetOption<T>(string optionName);
     }
 }

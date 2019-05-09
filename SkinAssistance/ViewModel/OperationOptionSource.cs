@@ -4,12 +4,12 @@ using System.Runtime.CompilerServices;
 
 namespace SkinAssistance.ViewModel
 {
-    public class FileMatchOptionSource : ObservableCollection<FileMatchOption>
+    public class OperationOptionSource : ObservableCollection<IOperation>
     {
         private bool ChangedFromCode;
-        public FileMatchOptionSource()
+        public OperationOptionSource()
         {
-            FileMatchOption.Selected += FileMatchOption_Selected;
+            Operation.Selected += FileMatchOption_Selected;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -17,15 +17,15 @@ namespace SkinAssistance.ViewModel
         {
             if (ChangedFromCode)
                 return;
-            FileMatchOption option = sender as FileMatchOption;
+            IOperation option = sender as IOperation;
             if (option != null && this.Items.Any())
             {
                 ChangedFromCode = true;
                 try
                 {
-                    foreach (FileMatchOption tmpOption in this.Items)
+                    foreach (Operation tmpOption in this.Items)
                     {
-                        if (tmpOption.MatchName != option.MatchName)
+                        if (tmpOption.OptionName != option.OptionName)
                         {
                             tmpOption.IsSelected = false;
                         }
@@ -35,14 +35,9 @@ namespace SkinAssistance.ViewModel
                 {
                     ChangedFromCode = false;
                 }
-             
-             
+
+
             }
         }
-    }
-
-    public class StringReourceMatcheOptionsSource
-    {
-
     }
 }
