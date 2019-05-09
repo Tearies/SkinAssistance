@@ -35,7 +35,10 @@ namespace SkinAssistance.ViewModel
             {
                 p.IsEnabled = true;
             }));
-            
+            FileMatcheOptions.Add(InstanseManager.ResolveService<StringFormatMatchOption>(initializeCallback: p =>
+            {
+                p.IsEnabled = true;
+            }));
 
             SkinAssistanceCommands.SelecDirectoryCommand.RegistorCommand(this, OnSelecDirectoryCommandsExcuted, OnSelecDirectoryCommandsCanExuted);
             SkinAssistanceCommands.StartSearchCommand.RegistorCommand(this, OnStartSearchCommandsExcuted,
