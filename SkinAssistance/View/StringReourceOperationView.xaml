@@ -11,7 +11,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -22,12 +21,10 @@
         <TextBlock VerticalAlignment="Center" Text="代码扫描位置" Grid.Row="0" Grid.Column="0"/>
         <TextBox VerticalAlignment="Center" IsReadOnly="True" Text="{Binding FindDir,Mode=OneWay}" Grid.Row="0" Grid.Column="1"/>
         <Button VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Content="选择文件夹" Command="commands:SkinAssistanceCommands.SelecDirectoryCommand"/>
-        <TextBlock VerticalAlignment="Center" Text="查找内容" Grid.Column="0" Grid.Row="2"/>
-        <ListView BorderThickness="1" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding FileMatcheOptions,Mode=OneWay}"/>
+        <TextBlock VerticalAlignment="Center" Text="查找内容" Grid.Column="0" Grid.Row="1"/>
+        <ListView BorderThickness="1" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding FileMatcheOptions,Mode=OneWay}"/>
         <Button VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Content="开始" Command="commands:SkinAssistanceCommands.StartSearchCommand"/>
-        <TextBlock Grid.Row="1" Grid.Column="0">资源前缀</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding ResourcePrefix,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-        <ListView Style="{DynamicResource MessageDetailsStyle}" Grid.Row="3" Grid.ColumnSpan="3" ItemsSource="{Binding DetailsInfo,Mode=OneWay}"/>
+        <ListView Style="{DynamicResource MessageDetailsStyle}" Grid.Row="2" Grid.ColumnSpan="3" ItemsSource="{Binding DetailsInfo,Mode=OneWay}"/>
 
     </Grid>
 </UserControl>
