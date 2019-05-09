@@ -72,7 +72,10 @@
   <ItemGroup>
     <Compile Include="AppEntry.cs" />
     <Compile Include="Commands\SkinAssistanceCommands.cs" />
+    <Compile Include="MatchOption\LocalCultureMatchOption.cs" />
+    <Compile Include="MatchOption\LocalResourceDictionaryMatchOption.cs" />
     <Compile Include="MatchOption\StringFormatMatchOption.cs" />
+    <Compile Include="Match\LocalResourceDictionaryMatch.cs" />
     <Compile Include="Match\Options\BrushMatchOptionOption.cs" />
     <Compile Include="Match\CustermErrorStringMatch.cs" />
     <Compile Include="MatchOption\CustermErrorStringMatchOption.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Match\Core\IMatch.cs" />
     <Compile Include="ViewModel\FileMatchOptionSource.cs" />
     <Compile Include="ViewModel\GlobalRelinkSource.cs" />
+    <Compile Include="ViewModel\LocalReourceOperationViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Match\MatchAttribute.cs" />
     <Compile Include="Match\MatchInstanse.cs" />
@@ -107,6 +111,9 @@
     <Compile Include="ViewModel\StringReourceOperationViewModel.cs" />
     <Compile Include="View\ExportOperationView.xaml.cs">
       <DependentUpon>ExportOperationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LocalReourceOperationView.xaml.cs">
+      <DependentUpon>LocalReourceOperationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -162,6 +169,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ExportOperationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LocalReourceOperationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

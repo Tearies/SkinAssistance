@@ -60,4 +60,6 @@ namespace SkinAssistance.ViewModel
             handler?.Invoke(obj, e);
         }
     }
+
+    
 }

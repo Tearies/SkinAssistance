@@ -40,4 +40,9 @@ namespace SkinAssistance.ViewModel
             }
         }
     }
+
+    public class FileMatchOptionMultiSource: ObservableCollection<FileMatchOption>
+    {
+
+    }
 }

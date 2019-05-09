@@ -90,6 +90,10 @@ namespace SkinAssistance.ViewModel
             {
                 IsEnabled = true
             });
+            OperationSource.Add(new Operation("本地化语言文件提取", typeof(LocalReourceOperationView))
+            {
+                IsEnabled = true
+            });
             SkinAssistanceCommands.SwitchOperationCommand.RegistorCommand(this, OnSwitchOperationCommandsExcuted,
                 OnSwitchOperationCommandsCanExcuted);
             SkinAssistanceCommands.ShowInformationCommand.RegistorCommand(this, OnShowInformationCommandsExcuted,
